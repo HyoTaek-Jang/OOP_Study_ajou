@@ -12,6 +12,7 @@ import javax.swing.*;
 public class ActionFrame extends JFrame {
 	private JPanel buttonPanel;
 	JPanel DrawPanel = new JPanel();
+	DrawComponent drawComponent = new DrawComponent();
 //	private static final int DEFAULT_WIDTH = 1000;
 //	private static final int DEFAULT_HEIGHT = 1000;
 
@@ -29,8 +30,7 @@ public class ActionFrame extends JFrame {
 //add panel to frame
 		setLayout(new BorderLayout());
 		add(buttonPanel, BorderLayout.NORTH);
-		add(new DrawComponent(), BorderLayout.CENTER);
-		DrawPanel.add(new DrawComponent());
+		DrawPanel.add(drawComponent);
 		add(DrawPanel, BorderLayout.CENTER);
 		pack();
 //associate the Y, B, and R keys with names
@@ -55,22 +55,33 @@ public class ActionFrame extends JFrame {
 
 		public void actionPerformed(ActionEvent event) {
 			
-			DrawPanel.add(new DrawComponent());
-			add(DrawPanel, BorderLayout.CENTER);
-			
-//			Color c = (Color) getValue("color");
-//			buttonPanel.setBackground(c);
+			Color c = (Color) getValue("color");
+			drawComponent.setColor(c);
+			repaint();
 		}
 	} // end of inner class ColorAction
 
 	class DrawComponent extends JComponent {
 		private static final int DEFAULT_WIDTH = 400;
 		private static final int DEFAULT_HEIGHT = 400;
-		
+		Color c;
+		public DrawComponent(Color c) {
+			this.c = c;
+		}
+
+		public void setColor(Color c2) {
+			this.c = c2;
+			
+		}
+
+		public DrawComponent() {
+			this.c = Color.BLUE;
+		}
+
 		public void paintComponent(Graphics g) {
 			Graphics2D g2 = (Graphics2D) g;
 			
-			g2.setColor(Color.BLUE);
+			g2.setColor(c);
 			
 			double leftX = 100;
 			double topY = 100;
