@@ -54,7 +54,6 @@ public class ActionFrame extends JFrame {
 		}
 
 		public void actionPerformed(ActionEvent event) {
-			
 			Color c = (Color) getValue("color");
 			drawComponent.setColor(c);
 			repaint();
