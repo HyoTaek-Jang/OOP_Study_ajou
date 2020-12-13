@@ -7,19 +7,22 @@ import java.util.*;
 public class TextFileTest {
 	public static void main(String[] args) throws IOException {
 		Employee[] staff = new Employee[3];
-		staff[0] = new Employee("효택", 75000, 1987, 12, 15);
-		staff[1] = new Employee("짱이", 50000, 1989, 10, 1);
-		staff[2] = new Employee("토니", 40000, 1990, 3, 15);
+		staff[0] = new Employee("짱이", 75000, 1987, 12, 15);
+		staff[1] = new Employee("택택", 50000, 1989, 10, 1);
+		staff[2] = new Employee("브라움", 40000, 1990, 3, 15);
 //save all employee records to the file employee.dat
-		try (PrintWriter out = new PrintWriter("employee.dat","UTF-8")) {
+		StringWriter writer = new StringWriter();
+		try (PrintWriter out = new PrintWriter(writer)) {
 			writeData(staff, out);
 		}
-//retrieve all records into a new array
-		try (Scanner in = new Scanner(new FileInputStream("employee.dat"))) {
-			Employee[] newStaff = readData(in);
-			for (Employee e : newStaff) // print the newly read employee records to the screen
-				System.out.println(e);
-		}
+		
+		System.out.println(writer.toString());
+////retrieve all records into a new array
+//		try (Scanner in = new Scanner(new FileInputStream("employee.dat"), "UTF-8")) {
+//			Employee[] newStaff = readData(in);
+//			for (Employee e : newStaff) // print the newly read employee records to the screen
+//				System.out.println(e);
+//		}
 	} // end of main() method
 //Writes all employees in an array to a print writer
 
